@@ -156,8 +156,7 @@ export function createOasis() {
 	color.g = 0.8;
 	color.b = 0.5;
 	color.a = 1.0;
-	// renderer.mesh = PrimitiveMesh.createPlane(engine);
-	renderer.mesh = PrimitiveMesh.createCuboid(engine, 0.5, 0.5, 0.5);
+	renderer.mesh = PrimitiveMesh.createCuboid(engine, 0.5, 0.5, 0.05);
 	renderer.setMaterial(mtl);
 
 	planeEntity.addComponent(TrailRenderer);
