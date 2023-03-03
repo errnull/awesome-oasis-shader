@@ -140,7 +140,7 @@ export function createOasis() {
 	const cameraEntity = rootEntity.createChild("camera");
 	cameraEntity.addComponent(Camera);
 	const pos = cameraEntity.transform.position;
-	pos.set(10, 10, 10);
+	pos.set(0, 0, 20);
 	cameraEntity.transform.position = pos;
 	cameraEntity.transform.lookAt(new Vector3(0, 0, 0));
 
