@@ -201,12 +201,12 @@ export class TrailRenderer extends Renderer {
 
     const { indices } = this;
 
-    for (var i = 0; i < this._localHeadVertexArray.length - 1; i++) {
+    for (let i = 0; i < this._localHeadVertexArray.length - 1; i++) {
 
-      var srcVertexIndex = (this._verticesPerNode * srcNodeIndex) + i;
-      var destVertexIndex = (this._verticesPerNode * destNodeIndex) + i;
+      let srcVertexIndex = (this._verticesPerNode * srcNodeIndex) + i;
+      let destVertexIndex = (this._verticesPerNode * destNodeIndex) + i;
 
-      var faceIndex = ((srcNodeIndex * this._facesPerNode) + (i * 2)) * 3;
+      let faceIndex = ((srcNodeIndex * this._facesPerNode) + (i * 2)) * 3;
 
       indices[faceIndex] = srcVertexIndex;
       indices[faceIndex + 1] = destVertexIndex;
@@ -224,9 +224,9 @@ export class TrailRenderer extends Renderer {
   private _disconnectNodes(srcNodeIndex: number) {
     const { indices } = this;
 
-    for (var i = 0; i < this._localHeadVertexArray.length - 1; i++) {
-      var srcVertexIndex = (this._verticesPerNode * srcNodeIndex) + i;
-      var faceIndex = ((srcVertexIndex * this._facesPerNode) + (i * 2)) * 3;
+    for (let i = 0; i < this._localHeadVertexArray.length - 1; i++) {
+      let srcVertexIndex = (this._verticesPerNode * srcNodeIndex) + i;
+      let faceIndex = ((srcVertexIndex * this._facesPerNode) + (i * 2)) * 3;
 
       indices[faceIndex] = 0;
       indices[faceIndex + 1] = 0;
@@ -236,9 +236,7 @@ export class TrailRenderer extends Renderer {
       indices[faceIndex + 4] = 0;
       indices[faceIndex + 5] = 0;
     }
-    if (this._indexBuffer) {
-      this._indexBuffer.setData(indices);
-    }
+    this._indexBuffer.setData(indices);
   }
 
   /**
@@ -253,7 +251,7 @@ export class TrailRenderer extends Renderer {
     if (this._currentLength >= 1) {
       this._connectNodes(this._currentEnd, 0);
       if (this._currentLength >= this._length) {
-        var disconnectIndex = this._currentEnd + 1 >= this._length ? 0 : this._currentEnd + 1;
+        let disconnectIndex = this._currentEnd + 1 >= this._length ? 0 : this._currentEnd + 1;
         this._disconnectNodes(disconnectIndex);
       }
     }
@@ -269,7 +267,7 @@ export class TrailRenderer extends Renderer {
     const currentEntityMatrix = new Matrix();
     currentEntityMatrix.copyFrom(this.entity.transform.worldMatrix);
 
-    var nextIndex = this._currentEnd + 1 >= this.length ? 0 : this._currentEnd + 1;
+    let nextIndex = this._currentEnd + 1 >= this.length ? 0 : this._currentEnd + 1;
 
     this._updateSingleBuffer(nextIndex, currentEntityMatrix);
   }
@@ -279,26 +277,25 @@ export class TrailRenderer extends Renderer {
 
     this._tempPosition.transformToVec3(transformMatrix);
 
-    for (var i = 0; i < this._localHeadVertexArray.length; i++) {
-      var vertex = this._tempLocalHeadVertexArray[i];
+    for (let i = 0; i < this._localHeadVertexArray.length; i++) {
+      let vertex = this._tempLocalHeadVertexArray[i];
       vertex.copyFrom(this._localHeadVertexArray[i]);
     }
-    for (var i = 0; i < this._localHeadVertexArray.length; i++) {
-      var vertex = this._tempLocalHeadVertexArray[i];
+    for (let i = 0; i < this._localHeadVertexArray.length; i++) {
+      let vertex = this._tempLocalHeadVertexArray[i];
       vertex.transformToVec3(transformMatrix);
     }
 
-    for (var i = 0; i < this._localHeadVertexArray.length; i++) {
+    for (let i = 0; i < this._localHeadVertexArray.length; i++) {
 
-      var positionIndex = ((this._verticesPerNode * nodeIndex) + i) * 3;
-      var transformedHeadVertex = this._tempLocalHeadVertexArray[i];
+      let positionIndex = ((this._verticesPerNode * nodeIndex) + i) * 3;
+      let transformedHeadVertex = this._tempLocalHeadVertexArray[i];
 
       positions[positionIndex] = transformedHeadVertex.x;
       positions[positionIndex + 1] = transformedHeadVertex.y;
       positions[positionIndex + 2] = transformedHeadVertex.z;
     }
-    if (this._vertexBuffer) {
-      this._vertexBuffer.setData(positions);
-    }
+
+    this._vertexBuffer.setData(positions);
   }
 }
