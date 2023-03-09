@@ -10,9 +10,8 @@ import {
 	Quaternion,
 	Matrix,
 	WebGLEngine,
-	ParticleRenderer,
-	TrailRenderer,
 } from "oasis-engine";
+import { TrailRenderer } from "../core/TrailRenderer";
 // import { OrbitControl } from "oasis-engine-toolkit";
 
 class Moving extends Script {

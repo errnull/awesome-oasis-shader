@@ -586,7 +586,7 @@
     "@oasis-engine-toolkit/skeleton-viewer" "0.8.0"
     "@oasis-engine-toolkit/stats" "0.8.0"
 
-"oasis-engine@^0.8.0-beta":
+"oasis-engine@^0.8.0-beta", "oasis-engine@^0.8.3":
   "integrity" "sha512-5bWKOby/4/B7hS64oAUg2+T3QRTBjoWzfYIWveLU/ethyUbzjFw2OGOYnt8G0kuIOD5AxybA0EXxWUBoi00FoA=="
   "resolved" "https://registry.npmjs.org/oasis-engine/-/oasis-engine-0.8.3.tgz"
   "version" "0.8.3"
