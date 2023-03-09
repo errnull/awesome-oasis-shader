@@ -38,7 +38,6 @@ export class TrailRenderer extends Renderer {
   private _vertexBuffer: Buffer;
 
   private _tempLocalHeadVertexArray: Array<Vector3>;
-  private _tempPosition: Vector3;
 
   constructor(props) {
     super(props);
@@ -274,8 +273,6 @@ export class TrailRenderer extends Renderer {
 
   private _updateSingleBuffer(nodeIndex: number, transformMatrix: Matrix) {
     const { positions } = this;
-
-    this._tempPosition.transformToVec3(transformMatrix);
 
     for (let i = 0; i < this._localHeadVertexArray.length; i++) {
       let vertex = this._tempLocalHeadVertexArray[i];
