@@ -46,8 +46,6 @@ export class TrailRenderer extends Renderer {
     this._currentEnd = 0;
     this._length = 200;
 
-    this._tempPosition = new Vector3();
-
     this._createHeadVertexList();
 
     this._tempLocalHeadVertexArray = [];
