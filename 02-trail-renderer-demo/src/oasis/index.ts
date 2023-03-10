@@ -34,6 +34,8 @@ class Moving extends Script {
 
 	private _tempTranslationMatrix: Matrix;
 
+	public trail: TrailRenderer;
+
 	constructor(entity: Entity) {
 		super(entity);
 
@@ -58,6 +60,8 @@ class Moving extends Script {
 	}
 
 	onUpdate() {
+
+		this.trail.updateBuffer();
 
 		this._tempRotationMatrix.identity();
 		this._tempTranslationMatrix.identity();
@@ -139,7 +143,7 @@ export function createOasis() {
 	const cameraEntity = rootEntity.createChild("camera");
 	cameraEntity.addComponent(Camera);
 	const pos = cameraEntity.transform.position;
-	pos.set(0, 0, 20);
+	pos.set(0, 0, 40);
 	cameraEntity.transform.position = pos;
 	cameraEntity.transform.lookAt(new Vector3(0, 0, 0));
 
@@ -155,11 +159,10 @@ export function createOasis() {
 	color.g = 0.8;
 	color.b = 0.5;
 	color.a = 1.0;
-	renderer.mesh = PrimitiveMesh.createCuboid(engine, 0.5, 0.5, 0.05);
+	renderer.mesh = PrimitiveMesh.createCuboid(engine, 1, 1, 0.1);
 	renderer.setMaterial(mtl);
-
+	// planeEntity.addComponent(Moving).trail = 
 	planeEntity.addComponent(TrailRenderer);
-	planeEntity.addComponent(Moving);
 
 	engine.run();
 }

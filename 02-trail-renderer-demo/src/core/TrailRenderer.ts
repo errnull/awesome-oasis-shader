@@ -43,7 +43,7 @@ export class TrailRenderer extends Renderer {
     super(props);
 
     this._currentLength = 0;
-    this._currentEnd = 0;
+    this._currentEnd = -1;
     this._length = 200;
 
     this._createHeadVertexList();
@@ -146,11 +146,30 @@ export class TrailRenderer extends Renderer {
   private _createMesh(): BufferMesh {
     const mesh = new BufferMesh(this.engine, "trail-Mesh");
 
-    const positionBuffer = new Buffer(this.engine, BufferBindFlag.VertexBuffer, this._positions, BufferUsage.Dynamic);
-    mesh.setVertexBufferBinding(positionBuffer, 12, 0);
+    this.positions[0] = -0.5;
+    this.positions[1] = 1;
+    this.positions[2] = 0;
+    this.positions[3] = 0.5;
+    this.positions[4] = 1;
+    this.positions[5] = 0;
+    this.positions[6] = -0.5;
+    this.positions[7] = 0;
+    this.positions[8] = 0;
+    this.positions[9] = 0.5;
+    this.positions[10] = 0;
+    this.positions[11] = 0;
+    this.positions[12] = -0.5;
+    this.positions[13] = -1;
+    this.positions[14] = 0;
+    this.positions[15] = 0.5;
+    this.positions[16] = -1;
+    this.positions[17] = 0;
 
-    const indexBuffer = new Buffer(this.engine, BufferBindFlag.IndexBuffer, this._indices, BufferUsage.Dynamic);
-    mesh.setIndexBufferBinding(indexBuffer, IndexFormat.UInt16);
+    const positionBuffer = new Buffer(this.engine, BufferBindFlag.VertexBuffer, this._positions, BufferUsage.Static);
+    mesh.setVertexBufferBinding(positionBuffer, 12);
+
+    // const indexBuffer = new Buffer(this.engine, BufferBindFlag.IndexBuffer, this._indices, BufferUsage.Dynamic);
+    // mesh.setIndexBufferBinding(indexBuffer, IndexFormat.UInt16);
 
     mesh.setVertexElements(
     [
@@ -159,24 +178,23 @@ export class TrailRenderer extends Renderer {
     mesh.addSubMesh(0, this.indices.length, 5);
 
     this._vertexBuffer = positionBuffer;
-    this._indexBuffer = indexBuffer;
+    // this._indexBuffer = indexBuffer;
     this._mesh = mesh;
 
     return mesh;
   }
 
   private _createHeadVertexList(): void {
-    const localHeadWidth = 5;
+    const localHeadWidth = 1;
     this._localHeadVertexArray = [];
 
     let halfWidth = localHeadWidth || 1.0;
     halfWidth = halfWidth / 2.0;
 
     this._localHeadVertexArray.push(new Vector3(-halfWidth, 1, 0));
-    this._localHeadVertexArray.push(new Vector3(0, 1, 0));
     this._localHeadVertexArray.push(new Vector3(halfWidth, 1, 0));
 
-    this._verticesPerNode = 3;
+    this._verticesPerNode = 2;
   }
 
   /**
@@ -241,10 +259,11 @@ export class TrailRenderer extends Renderer {
    * @internal
    */
   update(deltaTime: number): void {
-    this._updateBuffer();
+    // this._updateBuffer();
   }
 
-  private _updateBuffer(): void {
+  public updateBuffer(): void {
+    let nextIndex = this._currentEnd + 1 >= this.length ? 0 : this._currentEnd + 1;
     if (this._currentLength >= 1) {
       this._connectNodes(this._currentEnd, 0);
       if (this._currentLength >= this._length) {
@@ -263,8 +282,6 @@ export class TrailRenderer extends Renderer {
 
     const currentEntityMatrix = new Matrix();
     currentEntityMatrix.copyFrom(this.entity.transform.worldMatrix);
-
-    let nextIndex = this._currentEnd + 1 >= this.length ? 0 : this._currentEnd + 1;
 
     this._updateSingleBuffer(nextIndex, currentEntityMatrix);
   }
