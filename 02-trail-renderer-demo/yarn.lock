@@ -249,87 +249,102 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@oasis-engine-toolkit/auxiliary-lines@0.8.0":
-  "integrity" "sha512-vL83DTiXMOP3o8PXuoQI/xdMfi7bQsKF6JGypi28tP9059rWrKCelgAcZ+Padh8xkvSDlDpPPk0lf2E8lb5CDQ=="
-  "resolved" "https://registry.npmjs.org/@oasis-engine-toolkit/auxiliary-lines/-/auxiliary-lines-0.8.0.tgz"
-  "version" "0.8.0"
+"@oasis-engine-toolkit/auxiliary-lines@0.9.0-beta.4":
+  "integrity" "sha512-TOB8HFdOj8UBvz9PBkHcpdTSlj8+Kruq9GVUfdBNXAywr5oiPZDtsk8QTs24OB/ka4VTTn/3fzvO62yLJhk6Uw=="
+  "resolved" "https://registry.npmjs.org/@oasis-engine-toolkit/auxiliary-lines/-/auxiliary-lines-0.9.0-beta.4.tgz"
+  "version" "0.9.0-beta.4"
 
-"@oasis-engine-toolkit/controls@0.8.0":
-  "integrity" "sha512-PTjA+XdoIK2ffDmaZW5km/UC4ybXZRupnzNaizSRsLBLlciAJHnobjySHeoJR2vKQTZw/vwSjXd+3/ZoF/UN6A=="
-  "resolved" "https://registry.npmjs.org/@oasis-engine-toolkit/controls/-/controls-0.8.0.tgz"
-  "version" "0.8.0"
+"@oasis-engine-toolkit/controls@0.9.0-beta.4":
+  "integrity" "sha512-s3vGt6Iv8v8U5wg4djew6g0CL4/HZ8Kj2SMyH0qWxEH+1Oz7exbZxIIoBjSr460yCMqo04+BZNLCOgJMwYln3A=="
+  "resolved" "https://registry.npmjs.org/@oasis-engine-toolkit/controls/-/controls-0.9.0-beta.4.tgz"
+  "version" "0.9.0-beta.4"
 
-"@oasis-engine-toolkit/framebuffer-picker@0.8.0":
-  "integrity" "sha512-bl9/hfM29t7BlC8PKcHhewNeAs7jfLbPc9+0UbRRzpKuMI8OnKnluPAJlgHKjRtq+Q4avbxBQhByPH44Dd6QAg=="
-  "resolved" "https://registry.npmjs.org/@oasis-engine-toolkit/framebuffer-picker/-/framebuffer-picker-0.8.0.tgz"
-  "version" "0.8.0"
+"@oasis-engine-toolkit/framebuffer-picker@0.9.0-beta.4":
+  "integrity" "sha512-WDBc/qQtgpc2E+S21zYgeNaZchPZetL4msJnhC5lEFbwiYPFozp9WSyS4htWxPVrIFKNUY1aCH6HXg5jKmaBGA=="
+  "resolved" "https://registry.npmjs.org/@oasis-engine-toolkit/framebuffer-picker/-/framebuffer-picker-0.9.0-beta.4.tgz"
+  "version" "0.9.0-beta.4"
 
-"@oasis-engine-toolkit/gizmo@0.8.0":
-  "integrity" "sha512-4K4FxeIvCj6sdPZrd6WqIZsimpFHqM2c58vUGrhQFqkQZain3kvSKymBfoToT8cRHEJdMGtbW0R61nuxASLhWw=="
-  "resolved" "https://registry.npmjs.org/@oasis-engine-toolkit/gizmo/-/gizmo-0.8.0.tgz"
-  "version" "0.8.0"
+"@oasis-engine-toolkit/geometry-sketch@0.9.0-beta.4":
+  "integrity" "sha512-FXrTPT1LrJr/s3NKzGISXW2Tdz0TYkCQubGT5UJzGjrVsYuSvbz3JJTrUtl/CG9sC8GzhNz1XG/gTGZ0it466g=="
+  "resolved" "https://registry.npmjs.org/@oasis-engine-toolkit/geometry-sketch/-/geometry-sketch-0.9.0-beta.4.tgz"
+  "version" "0.9.0-beta.4"
 
-"@oasis-engine-toolkit/lines@0.8.0":
-  "integrity" "sha512-fhF6f6NO4T87KBglW5o/3atj+6GwucGASF7vkWUhaHjaw4CM/5nVRGMJLG3yaVpJWEev0tYx5x4JgzRmX5GEPQ=="
-  "resolved" "https://registry.npmjs.org/@oasis-engine-toolkit/lines/-/lines-0.8.0.tgz"
-  "version" "0.8.0"
+"@oasis-engine-toolkit/gizmo@0.9.0-beta.4":
+  "integrity" "sha512-a/U/48ZkzsYCUizNNyXYdqlmHHzW/k+XALUaURQI4Xn/7uOL1nMBb0b4IOTfrYEUv/0GuyM03FGt2JBYLGaU5g=="
+  "resolved" "https://registry.npmjs.org/@oasis-engine-toolkit/gizmo/-/gizmo-0.9.0-beta.4.tgz"
+  "version" "0.9.0-beta.4"
 
-"@oasis-engine-toolkit/outline@0.8.0":
-  "integrity" "sha512-Svil9d81fkPiuVgu6luyYzzfEezm3A7CsRUtQVZHSiYainZYfu+NnVvYc93pmcD0Ezw5BnF/7m1oPfHG5PrNRg=="
-  "resolved" "https://registry.npmjs.org/@oasis-engine-toolkit/outline/-/outline-0.8.0.tgz"
-  "version" "0.8.0"
+"@oasis-engine-toolkit/grid-material@0.9.0-beta.4":
+  "integrity" "sha512-qG3i7k52JdwcUbllo5a3/mrzkPJTt965fU4juKOLHFB5iPV5O/dIUqlY9smGoH+bgeOZHzTvWjUeQ3Wx8n/XLQ=="
+  "resolved" "https://registry.npmjs.org/@oasis-engine-toolkit/grid-material/-/grid-material-0.9.0-beta.4.tgz"
+  "version" "0.9.0-beta.4"
 
-"@oasis-engine-toolkit/planar-shadow-material@0.8.0":
-  "integrity" "sha512-mNYmIecC4nrW7uhfQtoOCqayI2zDT6QFu93LuP5OqWsz0UUieww6UrQpzT2bsbxtH+S2p4Sn4FFQZHOsYFcj/A=="
-  "resolved" "https://registry.npmjs.org/@oasis-engine-toolkit/planar-shadow-material/-/planar-shadow-material-0.8.0.tgz"
-  "version" "0.8.0"
+"@oasis-engine-toolkit/lines@0.9.0-beta.4":
+  "integrity" "sha512-c6nj1ZSLu1ZaEDyiLMpgff6yXTh4IxH1jxLG+wk2pgTeogfoDPKx2QSwSsljuuifmB4gdd77JKiULWxyGaWcrA=="
+  "resolved" "https://registry.npmjs.org/@oasis-engine-toolkit/lines/-/lines-0.9.0-beta.4.tgz"
+  "version" "0.9.0-beta.4"
 
-"@oasis-engine-toolkit/skeleton-viewer@0.8.0":
-  "integrity" "sha512-E2a3Md1azoFKpTJAXJXTCUCKj/XzqhjrTBT792pivO6gccF6dOhAuZ4/cWxnkcJVjZQ3a3hxC4pTFS8uxhrCdw=="
-  "resolved" "https://registry.npmjs.org/@oasis-engine-toolkit/skeleton-viewer/-/skeleton-viewer-0.8.0.tgz"
-  "version" "0.8.0"
+"@oasis-engine-toolkit/navigation-gizmo@0.9.0-beta.4":
+  "integrity" "sha512-xDDDp9PlLQ9Um66uCySxngJ+hRYm3OW9UTFZ3f5OdW9wcL+iUcRnF1UPtZmH1KJ0OIxlcEwsQ4WkCXypHsT/3A=="
+  "resolved" "https://registry.npmjs.org/@oasis-engine-toolkit/navigation-gizmo/-/navigation-gizmo-0.9.0-beta.4.tgz"
+  "version" "0.9.0-beta.4"
 
-"@oasis-engine-toolkit/stats@0.8.0":
-  "integrity" "sha512-o4I6P/IOi5sW4UWnWyeD+U30eR20o8Y77qomVvjLUhJXCZigtKuVrfoQzVZEidgxi8RHBhBsWOzJLmtHukJjYw=="
-  "resolved" "https://registry.npmjs.org/@oasis-engine-toolkit/stats/-/stats-0.8.0.tgz"
-  "version" "0.8.0"
+"@oasis-engine-toolkit/outline@0.9.0-beta.4":
+  "integrity" "sha512-d+QsO4eUmXTo+RKjr26b+5ctt7ed+459Q5Aw5oDEvfPmymGV7m5a0EjXi30aPS5ANPuP7mG3EbzogB7T6vefEQ=="
+  "resolved" "https://registry.npmjs.org/@oasis-engine-toolkit/outline/-/outline-0.9.0-beta.4.tgz"
+  "version" "0.9.0-beta.4"
 
-"@oasis-engine/core@0.8.3":
-  "integrity" "sha512-AGISJEY8XUQ8biq57ZCWjvtbPIwfG/FWfOB9HtqVhpMBOYDtmYZbO+ePgxvR0j0SG/lDjLd4LmpMxwBAxZDspw=="
-  "resolved" "https://registry.npmjs.org/@oasis-engine/core/-/core-0.8.3.tgz"
-  "version" "0.8.3"
+"@oasis-engine-toolkit/planar-shadow-material@0.9.0-beta.4":
+  "integrity" "sha512-i1KUJYL7Bt/7I8syAEiR+/3Z36j6QaqX8dRq8FaVd14XQkU7vP/YcMMPj9Kge1sHHpjZ8MbSKABMOwoAaUMnUg=="
+  "resolved" "https://registry.npmjs.org/@oasis-engine-toolkit/planar-shadow-material/-/planar-shadow-material-0.9.0-beta.4.tgz"
+  "version" "0.9.0-beta.4"
+
+"@oasis-engine-toolkit/skeleton-viewer@0.9.0-beta.4":
+  "integrity" "sha512-iu9HAOfn1DqGVT3RrFyGN5iqAZ7pF11nIo8+fkvblNl680DuiAr42ib989Oz93vAVhV3Boj4tH9AulUsyaa4jw=="
+  "resolved" "https://registry.npmjs.org/@oasis-engine-toolkit/skeleton-viewer/-/skeleton-viewer-0.9.0-beta.4.tgz"
+  "version" "0.9.0-beta.4"
+
+"@oasis-engine-toolkit/stats@0.9.0-beta.4":
+  "integrity" "sha512-M59W6goro8b+HpNTzZwCUCsuezBy87fKia4bRpIa8aDEG2Sq+wYvUsdccMQc4W5zruCd0ih08AB4+IxEcBKVNg=="
+  "resolved" "https://registry.npmjs.org/@oasis-engine-toolkit/stats/-/stats-0.9.0-beta.4.tgz"
+  "version" "0.9.0-beta.4"
+
+"@oasis-engine/core@0.9.0-beta.68":
+  "integrity" "sha512-RmalOd4fgBrOCS7jEp9Q8jZ0UiJaozUIDxqV8dl1MNFKvcj4J/ZCUkP8kDlbRCgBoctU6OQ9diIg48BemsA2eQ=="
+  "resolved" "https://registry.npmjs.org/@oasis-engine/core/-/core-0.9.0-beta.68.tgz"
+  "version" "0.9.0-beta.68"
   dependencies:
-    "@oasis-engine/math" "0.8.3"
+    "@oasis-engine/math" "0.9.0-beta.68"
 
-"@oasis-engine/draco@0.8.3":
-  "integrity" "sha512-On/RLU3W1sBYdNhKMykD2ZqD35gRbE4uWsD5nGshS/IxIuF7Gq9iQlfjNz2YtjoHFI1d+hMf0xUv2iDboUOo9g=="
-  "resolved" "https://registry.npmjs.org/@oasis-engine/draco/-/draco-0.8.3.tgz"
-  "version" "0.8.3"
+"@oasis-engine/draco@0.9.0-beta.68":
+  "integrity" "sha512-ZQqvoQ9ut3R3vqu+IYvhM9HzR/lgIYhJSo1SbumbioI5+WdcU9rCxH+suOlUbdbvFZPTUTUtQvZrBW1p+pUhPQ=="
+  "resolved" "https://registry.npmjs.org/@oasis-engine/draco/-/draco-0.9.0-beta.68.tgz"
+  "version" "0.9.0-beta.68"
   dependencies:
-    "@oasis-engine/core" "0.8.3"
+    "@oasis-engine/core" "0.9.0-beta.68"
 
-"@oasis-engine/loader@0.8.3":
-  "integrity" "sha512-sDFSy3EicVtWavIV3eCF0rsNgl6soYTEWMLpy5rY4AxvOGpUy2CtMNQ/hloTulxQ7eE+eJUZCykOXApaad8mmA=="
-  "resolved" "https://registry.npmjs.org/@oasis-engine/loader/-/loader-0.8.3.tgz"
-  "version" "0.8.3"
+"@oasis-engine/loader@0.9.0-beta.68":
+  "integrity" "sha512-B1bkuOKXqaSou+NhcD8Egvm/LqSeEfEP7R/stdNoU22TBdsl+yk1Q5zxBqvakcJHQ36rGu3rDQZxaYyTJnq5IA=="
+  "resolved" "https://registry.npmjs.org/@oasis-engine/loader/-/loader-0.9.0-beta.68.tgz"
+  "version" "0.9.0-beta.68"
   dependencies:
-    "@oasis-engine/core" "0.8.3"
-    "@oasis-engine/draco" "0.8.3"
-    "@oasis-engine/math" "0.8.3"
-    "@oasis-engine/rhi-webgl" "0.8.3"
+    "@oasis-engine/core" "0.9.0-beta.68"
+    "@oasis-engine/draco" "0.9.0-beta.68"
+    "@oasis-engine/math" "0.9.0-beta.68"
+    "@oasis-engine/rhi-webgl" "0.9.0-beta.68"
 
-"@oasis-engine/math@0.8.3":
-  "integrity" "sha512-DfQXggv8pUxf5+eOfrImX1ktjl/R4vVEsucUtQuMt1De7V61lTaQe3en40vzlfdBBlM8vFpPOWjhsBPl2oKFLg=="
-  "resolved" "https://registry.npmjs.org/@oasis-engine/math/-/math-0.8.3.tgz"
-  "version" "0.8.3"
+"@oasis-engine/math@0.9.0-beta.68":
+  "integrity" "sha512-xaPLcpyZe3r0kXOpokY9yBuz6no3LxZi+yZyXxenmW56OdJqiS54YsfXm13WNltLUEOLsds6ouTq0GCk6PTlhw=="
+  "resolved" "https://registry.npmjs.org/@oasis-engine/math/-/math-0.9.0-beta.68.tgz"
+  "version" "0.9.0-beta.68"
 
-"@oasis-engine/rhi-webgl@0.8.3":
-  "integrity" "sha512-oAnRL9z7C6r91EACbhqCtlsJSDldensoFwaCQKy4zw2ikae3NwoyOvomgJA4sPIh9l646NJEPucjWpSwZc1W/w=="
-  "resolved" "https://registry.npmjs.org/@oasis-engine/rhi-webgl/-/rhi-webgl-0.8.3.tgz"
-  "version" "0.8.3"
+"@oasis-engine/rhi-webgl@0.9.0-beta.68":
+  "integrity" "sha512-1zvh6RBme4vk9QEJ50og8ULIbHDWO5ugsyrFQKShZA/UQLhehfSYcXXdGkbVqO3E5/wqvRzWS6r9eowXY24x1Q=="
+  "resolved" "https://registry.npmjs.org/@oasis-engine/rhi-webgl/-/rhi-webgl-0.9.0-beta.68.tgz"
+  "version" "0.9.0-beta.68"
   dependencies:
-    "@oasis-engine/core" "0.8.3"
-    "@oasis-engine/math" "0.8.3"
+    "@oasis-engine/core" "0.9.0-beta.68"
+    "@oasis-engine/math" "0.9.0-beta.68"
 
 "@rollup/pluginutils@^4.1.1", "@rollup/pluginutils@^4.2.1":
   "integrity" "sha512-iKnFXr7NkdZAIHiIWE+BX5ULi/ucVFYWD6TbAV+rZctiRTY2PL6tsIKhoIOaoskiWAkgu+VsbXgUVDNLHf+InQ=="
@@ -571,30 +586,33 @@
   "resolved" "https://registry.npmjs.org/node-releases/-/node-releases-2.0.10.tgz"
   "version" "2.0.10"
 
-"oasis-engine-toolkit@^0.8.1":
-  "integrity" "sha512-L/+ZfiTunWFkzF5DgUPgRyIIPybi+oOPKbIUW2rFMIN8oxjW2A72IJYNixwOmKSKpOS94g1I700EwZoAmGwpkg=="
-  "resolved" "https://registry.npmjs.org/oasis-engine-toolkit/-/oasis-engine-toolkit-0.8.1.tgz"
-  "version" "0.8.1"
+"oasis-engine-toolkit@^0.9.0-beta.4":
+  "integrity" "sha512-Is2fnhzdqOXRUI4VsfcToCQeUeHWDXybX/UyWeJUuLVCo9iB2lHsn3Tb6wcKKtYSIQQrwLEMu/qikaRR6XcHXw=="
+  "resolved" "https://registry.npmjs.org/oasis-engine-toolkit/-/oasis-engine-toolkit-0.9.0-beta.4.tgz"
+  "version" "0.9.0-beta.4"
   dependencies:
-    "@oasis-engine-toolkit/auxiliary-lines" "0.8.0"
-    "@oasis-engine-toolkit/controls" "0.8.0"
-    "@oasis-engine-toolkit/framebuffer-picker" "0.8.0"
-    "@oasis-engine-toolkit/gizmo" "0.8.0"
-    "@oasis-engine-toolkit/lines" "0.8.0"
-    "@oasis-engine-toolkit/outline" "0.8.0"
-    "@oasis-engine-toolkit/planar-shadow-material" "0.8.0"
-    "@oasis-engine-toolkit/skeleton-viewer" "0.8.0"
-    "@oasis-engine-toolkit/stats" "0.8.0"
+    "@oasis-engine-toolkit/auxiliary-lines" "0.9.0-beta.4"
+    "@oasis-engine-toolkit/controls" "0.9.0-beta.4"
+    "@oasis-engine-toolkit/framebuffer-picker" "0.9.0-beta.4"
+    "@oasis-engine-toolkit/geometry-sketch" "0.9.0-beta.4"
+    "@oasis-engine-toolkit/gizmo" "0.9.0-beta.4"
+    "@oasis-engine-toolkit/grid-material" "0.9.0-beta.4"
+    "@oasis-engine-toolkit/lines" "0.9.0-beta.4"
+    "@oasis-engine-toolkit/navigation-gizmo" "0.9.0-beta.4"
+    "@oasis-engine-toolkit/outline" "0.9.0-beta.4"
+    "@oasis-engine-toolkit/planar-shadow-material" "0.9.0-beta.4"
+    "@oasis-engine-toolkit/skeleton-viewer" "0.9.0-beta.4"
+    "@oasis-engine-toolkit/stats" "0.9.0-beta.4"
 
-"oasis-engine@^0.8.0-beta", "oasis-engine@^0.8.3":
-  "integrity" "sha512-5bWKOby/4/B7hS64oAUg2+T3QRTBjoWzfYIWveLU/ethyUbzjFw2OGOYnt8G0kuIOD5AxybA0EXxWUBoi00FoA=="
-  "resolved" "https://registry.npmjs.org/oasis-engine/-/oasis-engine-0.8.3.tgz"
-  "version" "0.8.3"
+"oasis-engine@^0.9.0-alpha", "oasis-engine@^0.9.0-beta.68":
+  "integrity" "sha512-DURAmEGY574iOGJSYAHc8kYVK6+D2HUrwxQJ/f0JoasrxyRc3tj2zcaT4Djp2KCHX51bMNYWW27W8u2QxujH5w=="
+  "resolved" "https://registry.npmjs.org/oasis-engine/-/oasis-engine-0.9.0-beta.68.tgz"
+  "version" "0.9.0-beta.68"
   dependencies:
-    "@oasis-engine/core" "0.8.3"
-    "@oasis-engine/loader" "0.8.3"
-    "@oasis-engine/math" "0.8.3"
-    "@oasis-engine/rhi-webgl" "0.8.3"
+    "@oasis-engine/core" "0.9.0-beta.68"
+    "@oasis-engine/loader" "0.9.0-beta.68"
+    "@oasis-engine/math" "0.9.0-beta.68"
+    "@oasis-engine/rhi-webgl" "0.9.0-beta.68"
 
 "object-assign@^4.1.1":
   "integrity" "sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg=="

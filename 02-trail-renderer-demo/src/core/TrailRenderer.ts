@@ -1,6 +1,6 @@
 
 
-import { BlinnPhongMaterial, BufferMesh } from "oasis-engine";
+import { BlinnPhongMaterial, BufferMesh, CullMode } from "oasis-engine";
 import { Material } from "oasis-engine";
 import { Shader } from "oasis-engine";
 import { Buffer, BufferBindFlag, BufferUsage, IndexFormat, Mesh, VertexElement, VertexElementFormat } from "oasis-engine";
@@ -146,25 +146,6 @@ export class TrailRenderer extends Renderer {
   private _createMesh(): BufferMesh {
     const mesh = new BufferMesh(this.engine, "trail-Mesh");
 
-    this.positions[0] = -0.5;
-    this.positions[1] = 1;
-    this.positions[2] = 0;
-    this.positions[3] = 0.5;
-    this.positions[4] = 1;
-    this.positions[5] = 0;
-    this.positions[6] = -0.5;
-    this.positions[7] = 0;
-    this.positions[8] = 0;
-    this.positions[9] = 0.5;
-    this.positions[10] = 0;
-    this.positions[11] = 0;
-    this.positions[12] = -0.5;
-    this.positions[13] = -1;
-    this.positions[14] = 0;
-    this.positions[15] = 0.5;
-    this.positions[16] = -1;
-    this.positions[17] = 0;
-
     const positionBuffer = new Buffer(this.engine, BufferBindFlag.VertexBuffer, this._positions, BufferUsage.Static);
     mesh.setVertexBufferBinding(positionBuffer, 12);
 
@@ -175,7 +156,7 @@ export class TrailRenderer extends Renderer {
     [
         new VertexElement("POSITION", 0, VertexElementFormat.Vector3, 0),
     ])
-    mesh.addSubMesh(0, this.indices.length, 5);
+    mesh.addSubMesh(0, this.positions.length, 5);
 
     this._vertexBuffer = positionBuffer;
     // this._indexBuffer = indexBuffer;
@@ -203,12 +184,15 @@ export class TrailRenderer extends Renderer {
   protected _render(context: any): void {
     const { mesh, material } = this;
 
-    const renderPipeline = context._renderPipeline;
+    const renderPipeline = context.camera._renderPipeline;
     const renderElementPool = this._engine._renderElementPool;
 
-    const element = renderElementPool.getFromPool();
+    const renderState = material.renderState;
+    const shaderPasse = material.shader.passes[0];
+    renderState.rasterState.cullMode = CullMode.Off;
 
-    element.setValue(this, mesh, mesh.subMeshes[0], material);
+    const element = renderElementPool.getFromPool();
+    element.setValue(this, mesh, mesh.subMeshes[0], material, renderState, shaderPasse);
     renderPipeline.pushPrimitive(element);
   }
 
@@ -231,9 +215,9 @@ export class TrailRenderer extends Renderer {
       indices[faceIndex + 4] = destVertexIndex + 1;
       indices[faceIndex + 5] = srcVertexIndex + 1;
     }
-    if (this._indexBuffer) {
-      this._indexBuffer.setData(indices);
-    }
+    // if (this._indexBuffer) {
+    //   this._indexBuffer.setData(indices);
+    // }
   }
 
   private _disconnectNodes(srcNodeIndex: number) {
@@ -251,7 +235,7 @@ export class TrailRenderer extends Renderer {
       indices[faceIndex + 4] = 0;
       indices[faceIndex + 5] = 0;
     }
-    this._indexBuffer.setData(indices);
+    // this._indexBuffer.setData(indices);
   }
 
   /**
@@ -303,9 +287,13 @@ export class TrailRenderer extends Renderer {
       let positionIndex = ((this._verticesPerNode * nodeIndex) + i) * 3;
       let transformedHeadVertex = this._tempLocalHeadVertexArray[i];
 
-      positions[positionIndex] = transformedHeadVertex.x;
-      positions[positionIndex + 1] = transformedHeadVertex.y;
-      positions[positionIndex + 2] = transformedHeadVertex.z;
+      // positions[positionIndex] = transformedHeadVertex.x;
+      // positions[positionIndex + 1] = transformedHeadVertex.y;
+      // positions[positionIndex + 2] = transformedHeadVertex.z;
+
+      positions[positionIndex] = -0.5;
+      positions[positionIndex + 1] = nodeIndex + 1.0;
+      positions[positionIndex + 2] = 0;
     }
 
     this._vertexBuffer.setData(positions);

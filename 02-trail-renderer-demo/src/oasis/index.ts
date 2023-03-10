@@ -12,8 +12,7 @@ import {
 	WebGLEngine,
 } from "oasis-engine";
 import { TrailRenderer } from "../core/TrailRenderer";
-// import { OrbitControl } from "oasis-engine-toolkit";
-
+import { OrbitControl } from "oasis-engine-toolkit";
 class Moving extends Script {
 
 	private _lastTrailUpdateTime: number;
@@ -146,6 +145,7 @@ export function createOasis() {
 	pos.set(0, 0, 40);
 	cameraEntity.transform.position = pos;
 	cameraEntity.transform.lookAt(new Vector3(0, 0, 0));
+	cameraEntity.addComponent(OrbitControl);
 
 	// init light
 	scene.ambientLight.diffuseSolidColor.set(1, 1, 1, 1);
@@ -161,8 +161,7 @@ export function createOasis() {
 	color.a = 1.0;
 	renderer.mesh = PrimitiveMesh.createCuboid(engine, 1, 1, 0.1);
 	renderer.setMaterial(mtl);
-	// planeEntity.addComponent(Moving).trail = 
-	planeEntity.addComponent(TrailRenderer);
+	planeEntity.addComponent(Moving).trail = planeEntity.addComponent(TrailRenderer);
 
 	engine.run();
 }
