@@ -168,8 +168,8 @@ export class TrailRenderer extends Renderer {
     const positionBuffer = new Buffer(this.engine, BufferBindFlag.VertexBuffer, this._positions, BufferUsage.Static);
     mesh.setVertexBufferBinding(positionBuffer, 12);
 
-    // const indexBuffer = new Buffer(this.engine, BufferBindFlag.IndexBuffer, this._indices, BufferUsage.Dynamic);
-    // mesh.setIndexBufferBinding(indexBuffer, IndexFormat.UInt16);
+    const indexBuffer = new Buffer(this.engine, BufferBindFlag.IndexBuffer, this._indices, BufferUsage.Dynamic);
+    mesh.setIndexBufferBinding(indexBuffer, IndexFormat.UInt16);
 
     mesh.setVertexElements(
       [
@@ -178,7 +178,7 @@ export class TrailRenderer extends Renderer {
     mesh.addSubMesh(0, 18, 5);
 
     this._vertexBuffer = positionBuffer;
-    // this._indexBuffer = indexBuffer;
+    this._indexBuffer = indexBuffer;
     this._mesh = mesh;
 
     return mesh;
@@ -234,9 +234,9 @@ export class TrailRenderer extends Renderer {
       indices[faceIndex + 4] = destVertexIndex + 1;
       indices[faceIndex + 5] = srcVertexIndex + 1;
     }
-    // if (this._indexBuffer) {
-    //   this._indexBuffer.setData(indices);
-    // }
+    if (this._indexBuffer) {
+      this._indexBuffer.setData(indices);
+    }
   }
 
   private _disconnectNodes(srcNodeIndex: number) {
@@ -254,7 +254,7 @@ export class TrailRenderer extends Renderer {
       indices[faceIndex + 4] = 0;
       indices[faceIndex + 5] = 0;
     }
-    // this._indexBuffer.setData(indices);
+    this._indexBuffer.setData(indices);
   }
 
   /**
