@@ -146,6 +146,25 @@ export class TrailRenderer extends Renderer {
   private _createMesh(): BufferMesh {
     const mesh = new BufferMesh(this.engine, "trail-Mesh");
 
+    // this.positions[0] = -0.5;
+    // this.positions[1] = 1;
+    // this.positions[2] = 0;
+    // this.positions[3] = 0.5;
+    // this.positions[4] = 1;
+    // this.positions[5] = 0;
+    // this.positions[6] = -0.5;
+    // this.positions[7] = 0;
+    // this.positions[8] = 0;
+    // this.positions[9] = 0.5;
+    // this.positions[10] = 0;
+    // this.positions[11] = 0;
+    // this.positions[12] = -0.5;
+    // this.positions[13] = -1;
+    // this.positions[14] = 0;
+    // this.positions[15] = 0.5;
+    // this.positions[16] = -1;
+    // this.positions[17] = 0;
+
     const positionBuffer = new Buffer(this.engine, BufferBindFlag.VertexBuffer, this._positions, BufferUsage.Static);
     mesh.setVertexBufferBinding(positionBuffer, 12);
 
@@ -153,10 +172,10 @@ export class TrailRenderer extends Renderer {
     // mesh.setIndexBufferBinding(indexBuffer, IndexFormat.UInt16);
 
     mesh.setVertexElements(
-    [
+      [
         new VertexElement("POSITION", 0, VertexElementFormat.Vector3, 0),
-    ])
-    mesh.addSubMesh(0, this.positions.length, 5);
+      ])
+    mesh.addSubMesh(0, 18, 5);
 
     this._vertexBuffer = positionBuffer;
     // this._indexBuffer = indexBuffer;
@@ -287,13 +306,9 @@ export class TrailRenderer extends Renderer {
       let positionIndex = ((this._verticesPerNode * nodeIndex) + i) * 3;
       let transformedHeadVertex = this._tempLocalHeadVertexArray[i];
 
-      // positions[positionIndex] = transformedHeadVertex.x;
-      // positions[positionIndex + 1] = transformedHeadVertex.y;
-      // positions[positionIndex + 2] = transformedHeadVertex.z;
-
-      positions[positionIndex] = -0.5;
-      positions[positionIndex + 1] = nodeIndex + 1.0;
-      positions[positionIndex + 2] = 0;
+      positions[positionIndex] = transformedHeadVertex.x;
+      positions[positionIndex + 1] = transformedHeadVertex.y;
+      positions[positionIndex + 2] = transformedHeadVertex.z;
     }
 
     this._vertexBuffer.setData(positions);

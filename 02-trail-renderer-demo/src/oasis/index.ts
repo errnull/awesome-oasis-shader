@@ -50,7 +50,7 @@ class Moving extends Script {
 		this._baseForward = new Vector3(0, 0, -1);
 
 		this._tempQuaternion = new Quaternion();
-		
+
 		this._tempRotationMatrix = new Matrix();
 		this._lastRotationMatrix = new Matrix();
 
@@ -67,31 +67,31 @@ class Moving extends Script {
 
 		const time = performance.now();
 
-		const scaledTime = time *0.001;
+		const scaledTime = time * 0.001;
 		var areaScale = 4;
 		this._lastTargetPosition.copyFrom(this._currentTargetPosition);
 
-		this._currentTargetPosition.x = Math.sin( scaledTime ) * areaScale;
+		this._currentTargetPosition.x = Math.sin(scaledTime) * areaScale;
 		this._currentTargetPosition.y = Math.sin(scaledTime * 1.1) * areaScale;
 		this._currentTargetPosition.z = Math.sin(scaledTime * 1.6) * areaScale;
 
 		this._lastDirection.copyFrom(this._currentDirection);
-		
+
 		this._currentDirection.copyFrom(this._currentTargetPosition);
-		this._currentDirection.subtract( this._lastTargetPosition );
+		this._currentDirection.subtract(this._lastTargetPosition);
 		this._currentDirection.normalize();
 
 		Vector3.cross(this._currentDirection, this._baseForward, this._tempUp);
 		const angle = this.findAngleFrom(this._baseForward, this._currentDirection);
 
-		if(Math.abs(angle) > 0.01 && this._tempUp.lengthSquared() > 0.001) {
+		if (Math.abs(angle) > 0.01 && this._tempUp.lengthSquared() > 0.001) {
 			this._tempQuaternion = this.setFromUnitVectors(this._baseForward, this._currentDirection);
 			this._tempQuaternion.normalize();
 
 			Matrix.rotationQuaternion(this._tempQuaternion, this._tempRotationMatrix);
 			this._lastRotationMatrix.copyFrom(this._tempRotationMatrix);
-		}	
-		
+		}
+
 		this._tempTranslationMatrix.translate(this._currentTargetPosition);
 		this._tempTranslationMatrix.multiply(this._tempRotationMatrix);
 
@@ -99,19 +99,19 @@ class Moving extends Script {
 	}
 
 	private findAngleFrom(v1: Vector3, v2: Vector3): number {
-		const denominator = Math.sqrt( v1.lengthSquared() * v2.lengthSquared() );
-		if ( denominator === 0 ) return Math.PI / 2;
+		const denominator = Math.sqrt(v1.lengthSquared() * v2.lengthSquared());
+		if (denominator === 0) return Math.PI / 2;
 		const theta = Vector3.dot(v1, v2);
-		return Math.acos( MathUtil.clamp( theta, - 1, 1 ) );
+		return Math.acos(MathUtil.clamp(theta, - 1, 1));
 	}
 
 	private setFromUnitVectors(vFrom: Vector3, vTo: Vector3): Quaternion {
 		const quaternion = new Quaternion();
 
 		let r = Vector3.dot(vFrom, vTo) + 1;
-		if ( r < Number.EPSILON ) {
+		if (r < Number.EPSILON) {
 			r = 0;
-			if ( Math.abs( vFrom.x ) > Math.abs( vFrom.z ) ) {
+			if (Math.abs(vFrom.x) > Math.abs(vFrom.z)) {
 				quaternion.x = - vFrom.y;
 				quaternion.y = vFrom.x;
 				quaternion.z = 0;
@@ -162,6 +162,6 @@ export function createOasis() {
 	renderer.mesh = PrimitiveMesh.createCuboid(engine, 1, 1, 0.1);
 	renderer.setMaterial(mtl);
 	planeEntity.addComponent(Moving).trail = planeEntity.addComponent(TrailRenderer);
-
+	// planeEntity.addComponent(TrailRenderer);
 	engine.run();
 }
