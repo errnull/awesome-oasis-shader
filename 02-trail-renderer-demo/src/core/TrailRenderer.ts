@@ -218,25 +218,13 @@ export class TrailRenderer extends Renderer {
     }
 
     const finalVertexCount = this._currentLength * 6;
-    const finalPositions = new Float32Array(finalVertexCount);
-
-    // if (finalVertexCount == positions.length && nodeIndex != 199) {
-    //   let positionIndex = (this._verticesPerNode * (nodeIndex + 1)) * 3;
-    //   for (let i = positionIndex; i < finalVertexCount; i++) {
-    //     finalPositions[i - positionIndex] = positions[i];
-    //   }
-    //   for (let i = 0; i < positionIndex; i++) {
-    //     finalPositions[finalVertexCount - positionIndex + i] = positions[i];
-    //   }
-    // } else {
-    for (let i = 0; i < finalVertexCount - 1; i++) {
-      finalPositions[i] = positions[i];
+    if (finalVertexCount == positions.length && nodeIndex == 199) {
+      console.log(positions);
     }
-    // }
-    this._vertexBuffer.setData(finalPositions);
+
+    this._vertexBuffer.setData(positions);
     if (this.mesh.subMesh) {
       this.mesh.subMesh.count = (nodeIndex + 1) * 2;
     }
-
   }
 }
