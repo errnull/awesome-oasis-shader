@@ -124,31 +124,6 @@ export class TrailRenderer extends Renderer {
   private _createMesh(): BufferMesh {
     const mesh = new BufferMesh(this.engine, "trail-Mesh");
 
-    this.positions[0] = -0.5;
-    this.positions[1] = -1;
-    this.positions[2] = 0;
-
-    this.positions[3] = 0.5;
-    this.positions[4] = -1;
-    this.positions[5] = 0;
-
-    this.positions[6] = -0.5;
-    this.positions[7] = -2;
-    this.positions[8] = 0;
-
-    this.positions[9] = 0.5;
-    this.positions[10] = -2;
-    this.positions[11] = 0;
-
-    this.positions[12] = -0.5;
-    this.positions[13] = -3;
-    this.positions[14] = 0;
-
-    this.positions[15] = 0.5;
-    this.positions[16] = -3;
-    this.positions[17] = 0;
-
-
     const positionBuffer = new Buffer(this.engine, BufferBindFlag.VertexBuffer, this.positions, BufferUsage.Dynamic);
     mesh.setVertexBufferBinding(positionBuffer, 12);
     mesh.setVertexElements(
@@ -156,7 +131,7 @@ export class TrailRenderer extends Renderer {
         new VertexElement("POSITION", 0, VertexElementFormat.Vector3, 0),
       ])
 
-    mesh.addSubMesh(0, 7, MeshTopology.TriangleStrip);
+    mesh.addSubMesh(0, 0, MeshTopology.TriangleStrip);
 
     this._vertexBuffer = positionBuffer;
     this._mesh = mesh;
@@ -200,7 +175,7 @@ export class TrailRenderer extends Renderer {
    * @internal
    */
   update(deltaTime: number): void {
-    // this._updateBuffer();
+    this._updateBuffer();
   }
 
   private _updateBuffer(): void {
@@ -245,16 +220,23 @@ export class TrailRenderer extends Renderer {
     const finalVertexCount = this._currentLength * 6;
     const finalPositions = new Float32Array(finalVertexCount);
 
-    // console.log(finalVertexCount);
-    // console.log(nodeIndex);
-
+    // if (finalVertexCount == positions.length && nodeIndex != 199) {
+    //   let positionIndex = (this._verticesPerNode * (nodeIndex + 1)) * 3;
+    //   for (let i = positionIndex; i < finalVertexCount; i++) {
+    //     finalPositions[i - positionIndex] = positions[i];
+    //   }
+    //   for (let i = 0; i < positionIndex; i++) {
+    //     finalPositions[finalVertexCount - positionIndex + i] = positions[i];
+    //   }
+    // } else {
     for (let i = 0; i < finalVertexCount - 1; i++) {
-      if (positions.length > finalVertexCount) {
-        finalPositions[i] = positions[i];
-      } else {
-        finalPositions[i] = positions[positions.length - finalVertexCount + 1];
-      }
+      finalPositions[i] = positions[i];
     }
+    // }
     this._vertexBuffer.setData(finalPositions);
+    if (this.mesh.subMesh) {
+      this.mesh.subMesh.count = (nodeIndex + 1) * 2;
+    }
+
   }
 }
