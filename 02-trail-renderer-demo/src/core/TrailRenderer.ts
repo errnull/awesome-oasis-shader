@@ -28,13 +28,7 @@ export class TrailRenderer extends Renderer {
 
   private _vertexCount: number;
 
-  private _faceCount: number;
-  private _facesPerNode: number;
-
   private _positions: Float32Array;
-  private _indices: Uint32Array;
-
-  private _indexBuffer: Buffer;
   private _vertexBuffer: Buffer;
 
   private _tempLocalHeadVertexArray: Array<Vector3>;
@@ -54,11 +48,7 @@ export class TrailRenderer extends Renderer {
     }
 
     this._vertexCount = this._length * this._verticesPerNode;
-    this._facesPerNode = (this._verticesPerNode - 1) * 2;
-    this._faceCount = this._length * this._facesPerNode;
-
     this._positions = new Float32Array(this._vertexCount * 3);
-    this._indices = new Uint32Array(this._faceCount * 3);
 
     this._createMesh();
     this._createMaterial();
@@ -119,18 +109,6 @@ export class TrailRenderer extends Renderer {
     this._positions = value;
   }
 
-
-  /**
-   * positions vertex of trail.
-   */
-  get indices(): Uint32Array {
-    return this._indices;
-  }
-
-  set indices(value: Uint32Array) {
-    this._indices = value;
-  }
-
   /**
    * @internal
    */
@@ -147,52 +125,29 @@ export class TrailRenderer extends Renderer {
     const mesh = new BufferMesh(this.engine, "trail-Mesh");
 
     this.positions[0] = -0.5;
-    this.positions[1] = 1;
+    this.positions[1] = -1;
     this.positions[2] = 0;
 
     this.positions[3] = 0.5;
-    this.positions[4] = 1;
+    this.positions[4] = -1;
     this.positions[5] = 0;
 
     this.positions[6] = -0.5;
-    this.positions[7] = 0;
+    this.positions[7] = -2;
     this.positions[8] = 0;
 
     this.positions[9] = 0.5;
-    this.positions[10] = 0;
+    this.positions[10] = -2;
     this.positions[11] = 0;
 
     this.positions[12] = -0.5;
-    this.positions[13] = -1;
+    this.positions[13] = -3;
     this.positions[14] = 0;
 
     this.positions[15] = 0.5;
-    this.positions[16] = -1;
+    this.positions[16] = -3;
     this.positions[17] = 0;
 
-    this.positions[18] = 1;
-    this.positions[19] = -3;
-    this.positions[20] = 0;
-
-    this.positions[21] = 1;
-    this.positions[22] = -2;
-    this.positions[23] = 0;
-
-    this.positions[24] = 2.5;
-    this.positions[25] = -1;
-    this.positions[26] = 0;
-
-    this.positions[27] = 1.5;
-    this.positions[28] = -1;
-    this.positions[29] = 0;
-
-    this.positions[30] = 2.5;
-    this.positions[31] = -1;
-    this.positions[32] = 0;
-
-    this.positions[33] = 1.5;
-    this.positions[34] = -1;
-    this.positions[35] = 0;
 
     const positionBuffer = new Buffer(this.engine, BufferBindFlag.VertexBuffer, this.positions, BufferUsage.Dynamic);
     mesh.setVertexBufferBinding(positionBuffer, 12);
@@ -201,7 +156,7 @@ export class TrailRenderer extends Renderer {
         new VertexElement("POSITION", 0, VertexElementFormat.Vector3, 0),
       ])
 
-    mesh.addSubMesh(0, 12, MeshTopology.TriangleStrip);
+    mesh.addSubMesh(0, 7, MeshTopology.TriangleStrip);
 
     this._vertexBuffer = positionBuffer;
     this._mesh = mesh;
@@ -287,6 +242,19 @@ export class TrailRenderer extends Renderer {
       positions[positionIndex + 2] = transformedHeadVertex.z;
     }
 
-    this._vertexBuffer.setData(positions);
+    const finalVertexCount = this._currentLength * 6;
+    const finalPositions = new Float32Array(finalVertexCount);
+
+    // console.log(finalVertexCount);
+    // console.log(nodeIndex);
+
+    for (let i = 0; i < finalVertexCount - 1; i++) {
+      if (positions.length > finalVertexCount) {
+        finalPositions[i] = positions[i];
+      } else {
+        finalPositions[i] = positions[positions.length - finalVertexCount + 1];
+      }
+    }
+    this._vertexBuffer.setData(finalPositions);
   }
 }
