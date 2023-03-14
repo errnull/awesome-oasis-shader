@@ -38,7 +38,7 @@ export class TrailRenderer extends Renderer {
 
     this._currentLength = 0;
     this._currentEnd = -1;
-    this._length = 200;
+    this._length = 80;
 
     this._createHeadVertexList();
 
@@ -220,7 +220,7 @@ export class TrailRenderer extends Renderer {
     const finalVertexCount = this._currentLength * 6;
     const finalPositions = new Float32Array(finalVertexCount);
 
-    if (finalVertexCount == positions.length && nodeIndex != 199) {
+    if (finalVertexCount == positions.length && nodeIndex != this.length - 1) {
       let positionIndex = (this._verticesPerNode * (nodeIndex + 1)) * 3;
       for (let i = positionIndex; i < finalVertexCount; i++) {
         finalPositions[i - positionIndex] = positions[i];
