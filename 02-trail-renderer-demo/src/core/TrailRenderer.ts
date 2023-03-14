@@ -140,7 +140,7 @@ export class TrailRenderer extends Renderer {
   }
 
   private _createHeadVertexList(): void {
-    const localHeadWidth = 1;
+    const localHeadWidth = this.width == 0 ? 1 : this.width;
     this._localHeadVertexArray = [];
 
     let halfWidth = localHeadWidth || 1.0;
@@ -165,9 +165,14 @@ export class TrailRenderer extends Renderer {
     const shaderPasse = material.shader.passes[0];
     renderState.rasterState.cullMode = CullMode.Off;
 
-    const element = renderElementPool.getFromPool();
-    element.setValue(this, mesh, mesh.subMeshes[0], material, renderState, shaderPasse);
-    renderPipeline.pushPrimitive(element);
+    const subMeshes = mesh.subMeshes;
+    for (let i = 0, n = subMeshes.length; i < n; i++) {
+      if (material) {
+        const element = renderElementPool.getFromPool();
+        element.setValue(this, mesh, mesh.subMeshes[i], material, renderState, shaderPasse);
+        renderPipeline.pushPrimitive(element);
+      }
+    }
   }
 
   /**
@@ -206,7 +211,6 @@ export class TrailRenderer extends Renderer {
       let vertex = this._tempLocalHeadVertexArray[i];
       vertex.transformToVec3(transformMatrix);
     }
-
     for (let i = 0; i < this._localHeadVertexArray.length; i++) {
 
       let positionIndex = ((this._verticesPerNode * nodeIndex) + i) * 3;
@@ -217,27 +221,26 @@ export class TrailRenderer extends Renderer {
       positions[positionIndex + 2] = transformedHeadVertex.z;
     }
 
+    this._vertexBuffer.setData(positions);
+
     const finalVertexCount = this._currentLength * 6;
-    const finalPositions = new Float32Array(finalVertexCount);
 
     if (finalVertexCount == positions.length && nodeIndex != this.length - 1) {
-      let positionIndex = (this._verticesPerNode * (nodeIndex + 1)) * 3;
-      for (let i = positionIndex; i < finalVertexCount; i++) {
-        finalPositions[i - positionIndex] = positions[i];
+      const finalMeshStart = (this._verticesPerNode * (nodeIndex + 1));
+      if (this.mesh.subMeshes.length != 2) {
+        this.mesh.clearSubMesh();
+        this.mesh.addSubMesh(0, 0, MeshTopology.TriangleStrip);
+        this.mesh.addSubMesh(0, 0, MeshTopology.TriangleStrip);
       }
-      for (let i = 0; i < positionIndex; i++) {
-        finalPositions[finalVertexCount - positionIndex + i] = positions[i];
-      }
+      this.mesh.subMeshes[0].start = finalMeshStart;
+      this.mesh.subMeshes[0].count = this._currentLength * 2 - finalMeshStart;
+      this.mesh.subMeshes[1].start = 0;
+      this.mesh.subMeshes[1].count = finalMeshStart;
     } else {
-      for (let i = 0; i < finalVertexCount - 1; i++) {
-        finalPositions[i] = positions[i];
+      if (this.mesh.subMesh) {
+        this.mesh.subMesh.start = 0;
+        this.mesh.subMesh.count = this._currentLength * 2;
       }
     }
-    this._vertexBuffer.setData(finalPositions);
-
-    if (this.mesh.subMesh) {
-      this.mesh.subMesh.count = this._currentLength * 2;
-    }
-
   }
 }
