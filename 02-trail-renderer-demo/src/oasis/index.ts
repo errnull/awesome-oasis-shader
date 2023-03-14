@@ -10,9 +10,8 @@ import {
 	Quaternion,
 	Matrix,
 	WebGLEngine,
-	ParticleRenderer,
+	TrailRenderer,
 } from "oasis-engine";
-import { TrailRenderer } from "../core/TrailRenderer";
 import { OrbitControl } from "oasis-engine-toolkit";
 class Moving extends Script {
 
@@ -159,12 +158,9 @@ export function createOasis() {
 	renderer.mesh = PrimitiveMesh.createCuboid(engine, 1, 1, 0.1);
 	renderer.setMaterial(mtl);
 	planeEntity.addComponent(Moving);
-	planeEntity.addComponent(TrailRenderer);
-
-	// const particle = rootEntity.addComponent(ParticleRenderer);
-	// particle.velocity = new Vector3(1, 1, 1);
-	// particle.maxCount = 20;
-	// particle.start();
+	 
+	const trail = planeEntity.addComponent(TrailRenderer);
+	trail.
 
 	engine.run();
 }
