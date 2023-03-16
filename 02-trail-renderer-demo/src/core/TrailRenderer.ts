@@ -1,6 +1,6 @@
 
 
-import { BlinnPhongMaterial, BufferMesh, CullMode, MeshTopology, Texture } from "oasis-engine";
+import { BaseMaterial, BlinnPhongMaterial, BufferMesh, CullMode, MeshTopology, Texture } from "oasis-engine";
 import { Material } from "oasis-engine";
 import { Shader } from "oasis-engine";
 import { Buffer, BufferBindFlag, BufferUsage, IndexFormat, Mesh, VertexElement, VertexElementFormat } from "oasis-engine";
@@ -16,7 +16,7 @@ export class TrailRenderer extends Renderer {
 
   private _mesh: Mesh;
   private _texture: Texture;
-  private _material: Material;
+  private _material: BaseMaterial;
 
   private _currentLength: number;
   private _currentEnd: number;
@@ -184,14 +184,15 @@ export class TrailRenderer extends Renderer {
     this._createMesh();
     this._createMaterial();
 
-    if(this._headColor && this._trailColor){
+    if (this._headColor && this._trailColor) {
       this.headColor = this._headColor;
       this.trailColor = this._trailColor;
     }
   }
 
   private _createMaterial(): Material {
-    this._material = new Material(this.engine, Shader.find("trail-shader"));
+    this._material = new BaseMaterial(this.engine, Shader.find("trail-shader"));
+    this._material.isTransparent = true;
     return this._material;
   }
 
@@ -201,7 +202,7 @@ export class TrailRenderer extends Renderer {
     const nodeIDsButter = new Buffer(this.engine, BufferBindFlag.VertexBuffer, this._nodeIDs, BufferUsage.Dynamic);
     mesh.setVertexBufferBinding(nodeIDsButter, 4, 0)
 
-    const vertexNodeIDsBuffer = new Buffer (this.engine, BufferBindFlag.VertexBuffer, this._vertexNodeIDs, BufferUsage.Dynamic);
+    const vertexNodeIDsBuffer = new Buffer(this.engine, BufferBindFlag.VertexBuffer, this._vertexNodeIDs, BufferUsage.Dynamic);
     mesh.setVertexBufferBinding(vertexNodeIDsBuffer, 4, 1);
 
     const positionBuffer = new Buffer(this.engine, BufferBindFlag.VertexBuffer, this.positions, BufferUsage.Dynamic);
