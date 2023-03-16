@@ -11,6 +11,9 @@ import {
 	Matrix,
 	WebGLEngine,
 	ParticleRenderer,
+	Color,
+	Texture2D,
+	AssetType,
 } from "oasis-engine";
 import { TrailRenderer } from "../core/TrailRenderer";
 import { OrbitControl } from "oasis-engine-toolkit";
@@ -149,22 +152,30 @@ export function createOasis() {
 	scene.ambientLight.diffuseIntensity = 1.2;
 
 	const planeEntity = rootEntity.createChild("plane");
-	const renderer = planeEntity.addComponent(MeshRenderer);
+	const meshRenderer = planeEntity.addComponent(MeshRenderer);
 	const mtl = new BlinnPhongMaterial(engine);
 	const color = mtl.baseColor;
 	color.r = 0.0;
 	color.g = 0.8;
 	color.b = 0.5;
 	color.a = 1.0;
-	renderer.mesh = PrimitiveMesh.createCuboid(engine, 1, 1, 0.1);
-	renderer.setMaterial(mtl);
+	meshRenderer.mesh = PrimitiveMesh.createCuboid(engine, 1, 1, 0.1);
+	meshRenderer.setMaterial(mtl);
 	planeEntity.addComponent(Moving);
-	planeEntity.addComponent(TrailRenderer);
-
-	// const particle = rootEntity.addComponent(ParticleRenderer);
-	// particle.velocity = new Vector3(1, 1, 1);
-	// particle.maxCount = 20;
-	// particle.start();
-
+	
+	let trailRenderer = planeEntity.addComponent(TrailRenderer);
+	trailRenderer.width = 1;
+	trailRenderer.length = 80;
+	trailRenderer.headColor = new Color(0.0, 1.0, 0.0, 1.0);
+    trailRenderer.trailColor = new Color(1.0, 0.0, 0.0, 1.0);
+	
+	engine.resourceManager
+  .load<Texture2D>({
+    url: "https://gw.alipayobjects.com/mdn/rms_d27172/afts/img/A*kxloQYq2YDEAAAAAAAAAAAAAARQnAQ",
+    type: AssetType.Texture2D
+  })
+  .then((resource) => {
+	trailRenderer.texture = resource;
 	engine.run();
+  });
 }
