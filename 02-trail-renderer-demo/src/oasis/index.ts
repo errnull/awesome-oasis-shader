@@ -190,7 +190,6 @@ export function createOasis() {
 		})
 		.then((resource) => {
 			Oasis.textures["Snow"] = resource;
-			trailRenderer.texture = resource;
 			engine.run();
 		});
 	Oasis.trailRenderer = trailRenderer;
@@ -204,7 +203,7 @@ function loadGUI() {
 		length: Oasis.trailRenderer.length,
 		headColor: Oasis.colorToGui(Oasis.trailRenderer.headColor),
 		trailColor: Oasis.colorToGui(Oasis.trailRenderer.trailColor),
-		texture: "Snow",
+		texture: "None",
 		tile_S: 8,
 		tile_T: 1,
 	};
