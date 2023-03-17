@@ -13,8 +13,8 @@ import {
 	Color,
 	Texture2D,
 	AssetType,
+	TrailRenderer
 } from "oasis-engine";
-import { TrailRenderer } from "../core/TrailRenderer";
 import * as dat from "dat.gui";
 import { Logger } from "oasis-engine";
 
