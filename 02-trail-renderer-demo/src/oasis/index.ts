@@ -10,16 +10,16 @@ import {
 	Quaternion,
 	Matrix,
 	WebGLEngine,
-	ParticleRenderer,
 	Color,
 	Texture2D,
 	AssetType,
 } from "oasis-engine";
 import { TrailRenderer } from "../core/TrailRenderer";
-import { OrbitControl } from "oasis-engine-toolkit";
-class Moving extends Script {
+import * as dat from "dat.gui";
+import { Logger } from "oasis-engine";
 
-	private _lastTrailUpdateTime: number;
+Logger.enable();
+class Moving extends Script {
 
 	private _lastTargetPosition: Vector3;
 	private _currentTargetPosition: Vector3;
@@ -37,10 +37,10 @@ class Moving extends Script {
 
 	private _tempTranslationMatrix: Matrix;
 
+	entity: any;
+
 	constructor(entity: Entity) {
 		super(entity);
-
-		this._lastTrailUpdateTime = performance.now();
 
 		this._lastTargetPosition = new Vector3();
 		this._currentTargetPosition = new Vector3();
@@ -57,11 +57,9 @@ class Moving extends Script {
 		this._lastRotationMatrix = new Matrix();
 
 		this._tempTranslationMatrix = new Matrix();
-
 	}
 
 	onUpdate() {
-
 		this._tempRotationMatrix.identity();
 		this._tempTranslationMatrix.identity();
 
@@ -132,7 +130,24 @@ class Moving extends Script {
 	}
 }
 
+class Oasis {
+	static guiToColor(gui: number[], color: Color) {
+		color.set(gui[0] / 255.0, gui[1] / 255.0, gui[2] / 255.0, color.a);
+	}
+
+	static colorToGui(color: Color = new Color(1, 1, 1)): number[] {
+		const v = [];
+		v[0] = color.r * 255.0;
+		v[1] = color.g * 255.0;
+		v[2] = color.b * 255.0;
+		return v;
+	}
+	static trailRenderer: TrailRenderer;
+	static textures = {};
+}
+
 export function createOasis() {
+
 	const engine = new WebGLEngine("canvas");
 	engine.canvas.resizeByClientSize();
 	const scene = engine.sceneManager.activeScene;
@@ -145,7 +160,6 @@ export function createOasis() {
 	pos.set(0, 0, 40);
 	cameraEntity.transform.position = pos;
 	cameraEntity.transform.lookAt(new Vector3(0, 0, 0));
-	cameraEntity.addComponent(OrbitControl);
 
 	// init light
 	scene.ambientLight.diffuseSolidColor.set(1, 1, 1, 1);
@@ -175,7 +189,73 @@ export function createOasis() {
 			type: AssetType.Texture2D
 		})
 		.then((resource) => {
+			Oasis.textures["Snow"] = resource;
 			trailRenderer.texture = resource;
 			engine.run();
 		});
+	Oasis.trailRenderer = trailRenderer;
+
+	loadGUI();
 }
+
+function loadGUI() {
+	const state = {
+		width: Oasis.trailRenderer.width,
+		length: Oasis.trailRenderer.length,
+		headColor: Oasis.colorToGui(Oasis.trailRenderer.headColor),
+		trailColor: Oasis.colorToGui(Oasis.trailRenderer.trailColor),
+		texture: "Snow",
+		tile_S: 8,
+		tile_T: 1,
+	};
+
+	const gui = new dat.GUI();
+	const trailFolder = gui.addFolder("Trail");
+	trailFolder.open();
+	trailFolder
+		.add(state, "width", 0, 20)
+		.step(1)
+		.onChange((v) => {
+			Oasis.trailRenderer.width = v;
+		});
+	trailFolder
+		.add(state, "length", 0, 200)
+		.step(40)
+		.onChange((v) => {
+			Oasis.trailRenderer.length = v;
+		});
+	trailFolder
+		.addColor(state, "headColor")
+		.onChange((v) => {
+			let color = Oasis.trailRenderer.headColor;
+			Oasis.guiToColor(v, color);
+			Oasis.trailRenderer.headColor = color;
+		});
+	trailFolder
+		.addColor(state, "trailColor")
+		.onChange((v) => {
+			let color = Oasis.trailRenderer.trailColor;
+			Oasis.guiToColor(v, color);
+			Oasis.trailRenderer.trailColor = color;
+		});
+
+	const textureFolder = gui.addFolder("Texture");
+	textureFolder.open();
+	textureFolder
+		.add(state, "texture", ["None", "Snow", ...Object.keys(Oasis.textures)])
+		.onChange((v) => {
+			Oasis.trailRenderer.texture = v === "None" ? null : Oasis.textures[v];
+		});
+	textureFolder
+		.add(state, "tile_S", 0, 20)
+		.step(8)
+		.onChange((v) => {
+			Oasis.trailRenderer.textureTileS = v;
+		});
+	textureFolder
+		.add(state, "tile_T", 0, 10)
+		.step(1)
+		.onChange((v) => {
+			Oasis.trailRenderer.textureTileT = v;
+		});
+}	

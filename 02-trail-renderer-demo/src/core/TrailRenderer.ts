@@ -45,6 +45,9 @@ export class TrailRenderer extends Renderer {
   private _headColor: Color;
   private _trailColor: Color;
 
+  private _textureTileS: number;
+  private _textureTileT: number;
+
   constructor(props) {
     super(props);
   }
@@ -70,10 +73,10 @@ export class TrailRenderer extends Renderer {
   set texture(value: Texture) {
     this._texture = value;
     if (value) {
-      this.shaderData.enableMacro("trailTexture");
+      this.material.shaderData.enableMacro("trailTexture");
       this.material.shaderData.setTexture("u_texture", value);
     } else {
-      this.shaderData.disableMacro("trailTexture");
+      this.material.shaderData.disableMacro("trailTexture");
     }
   }
 
@@ -97,6 +100,7 @@ export class TrailRenderer extends Renderer {
 
   set width(value: number) {
     this._width = value;
+    this._init();
   }
 
   /**
@@ -142,7 +146,7 @@ export class TrailRenderer extends Renderer {
 
   set headColor(value: Color) {
     this._headColor = value;
-    this.material.shaderData.setVector4("u_headColor", new Vector4(value.r, value.g, value.b, value.a));
+    this.material.shaderData.setVector4("u_headColor", value);
   }
 
   /**
@@ -154,8 +158,32 @@ export class TrailRenderer extends Renderer {
 
   set trailColor(value: Color) {
     this._trailColor = value;
-    this.material.shaderData.setVector4("u_tailColor", new Vector4(value.r, value.g, value.b, value.a));
+    this.material.shaderData.setVector4("u_tailColor", value);
   }
+
+  /**
+   * texture tile S for trail
+   */
+  get textureTileS(): number {
+    return this._textureTileS;
+  }
+
+  set textureTileS(value: number) {
+    this._textureTileS = value;
+    this.material.shaderData.setVector4("u_textureTileS", value);
+  }
+
+  /**
+   * texture tile T for trail
+   */
+    get textureTileT(): number {
+      return this._textureTileT;
+    }
+  
+    set textureTileT(value: number) {
+      this._textureTileT = value;
+      this.material.shaderData.setVector4("u_textureTileT", value);
+    }
 
   /**
    * @internal
@@ -184,10 +212,13 @@ export class TrailRenderer extends Renderer {
     this._createMesh();
     this._createMaterial();
 
-    if (this._headColor && this._trailColor) {
-      this.headColor = this._headColor;
-      this.trailColor = this._trailColor;
-    }
+    this.headColor = this._headColor;
+    this.trailColor = this._trailColor;
+
+    this.texture = this._texture;
+
+    this.textureTileS = !this._textureTileS ? 8.0 : this._textureTileS;
+    this.textureTileT = !this._textureTileT ? 1.0 : this._textureTileT;
   }
 
   private _createMaterial(): Material {
