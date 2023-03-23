@@ -179,7 +179,7 @@ export function createOasis() {
 
 	let trailRenderer = planeEntity.addComponent(TrailRenderer);
 	trailRenderer.width = 1;
-	trailRenderer.length = 80;
+	trailRenderer.time = 1.0;
 	trailRenderer.headColor = new Color(0.0, 1.0, 0.0, 1.0);
 	trailRenderer.trailColor = new Color(1.0, 0.0, 0.0, 1.0);
 
@@ -200,7 +200,7 @@ export function createOasis() {
 function loadGUI() {
 	const state = {
 		width: Oasis.trailRenderer.width,
-		length: Oasis.trailRenderer.length,
+		time: Oasis.trailRenderer.time,
 		headColor: Oasis.colorToGui(Oasis.trailRenderer.headColor),
 		trailColor: Oasis.colorToGui(Oasis.trailRenderer.trailColor),
 		texture: "None",
@@ -212,16 +212,16 @@ function loadGUI() {
 	const trailFolder = gui.addFolder("Trail");
 	trailFolder.open();
 	trailFolder
-		.add(state, "width", 0, 20)
+		.add(state, "time", 0.1, 4.0)
+		.step(0.1)
+		.onChange((v) => {
+			Oasis.trailRenderer.time = v;
+		});
+	trailFolder
+		.add(state, "width", 0, 10)
 		.step(1)
 		.onChange((v) => {
 			Oasis.trailRenderer.width = v;
-		});
-	trailFolder
-		.add(state, "length", 0, 200)
-		.step(40)
-		.onChange((v) => {
-			Oasis.trailRenderer.length = v;
 		});
 	trailFolder
 		.addColor(state, "headColor")
@@ -247,7 +247,7 @@ function loadGUI() {
 		});
 	textureFolder
 		.add(state, "tile_S", 0, 20)
-		.step(8)
+		.step(1)
 		.onChange((v) => {
 			Oasis.trailRenderer.textureTileS = v;
 		});
