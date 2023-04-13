@@ -14,11 +14,8 @@ import {
 	Texture2D,
 	AssetType,
 	TrailRenderer
-} from "oasis-engine";
+} from "@galacean/engine";
 import * as dat from "dat.gui";
-import { Logger } from "oasis-engine";
-
-Logger.enable();
 class Moving extends Script {
 
 	private _lastTargetPosition: Vector3;
@@ -36,8 +33,6 @@ class Moving extends Script {
 	private _lastRotationMatrix: Matrix;
 
 	private _tempTranslationMatrix: Matrix;
-
-	entity: any;
 
 	constructor(entity: Entity) {
 		super(entity);
@@ -146,9 +141,9 @@ class Oasis {
 	static textures = {};
 }
 
-export function createOasis() {
+export async function createOasis() {
 
-	const engine = new WebGLEngine("canvas");
+	const engine = await WebGLEngine.create({ canvas: "canvas" });
 	engine.canvas.resizeByClientSize();
 	const scene = engine.sceneManager.activeScene;
 	const rootEntity = scene.createRootEntity();
@@ -174,7 +169,7 @@ export function createOasis() {
 	color.b = 0.5;
 	color.a = 1.0;
 	meshRenderer.mesh = PrimitiveMesh.createCuboid(engine, 1, 1, 0.1);
-	// meshRenderer.setMaterial(mtl);
+	meshRenderer.setMaterial(mtl);
 	planeEntity.addComponent(Moving);
 
 	let trailRenderer = planeEntity.addComponent(TrailRenderer);
@@ -258,3 +253,4 @@ function loadGUI() {
 			Oasis.trailRenderer.textureTileT = v;
 		});
 }	
+
