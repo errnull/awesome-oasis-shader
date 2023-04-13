@@ -174,7 +174,7 @@ export function createOasis() {
 	color.b = 0.5;
 	color.a = 1.0;
 	meshRenderer.mesh = PrimitiveMesh.createCuboid(engine, 1, 1, 0.1);
-	meshRenderer.setMaterial(mtl);
+	// meshRenderer.setMaterial(mtl);
 	planeEntity.addComponent(Moving);
 
 	let trailRenderer = planeEntity.addComponent(TrailRenderer);
