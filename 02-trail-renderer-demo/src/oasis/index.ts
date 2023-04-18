@@ -131,11 +131,7 @@ class Oasis {
 	}
 
 	static colorToGui(color: Color = new Color(1, 1, 1)): number[] {
-		const v = [];
-		v[0] = color.r * 255.0;
-		v[1] = color.g * 255.0;
-		v[2] = color.b * 255.0;
-		return v;
+		return [color.r * 255.0, color.g * 255.0, color.b * 255.0];
 	}
 	static trailRenderer: TrailRenderer;
 	static textures = {};
@@ -173,14 +169,14 @@ export async function createOasis() {
 	planeEntity.addComponent(Moving);
 
 	let trailRenderer = planeEntity.addComponent(TrailRenderer);
-	trailRenderer.width = 1;
-	trailRenderer.time = 1.0;
-	trailRenderer.headColor = new Color(0.0, 1.0, 0.0, 1.0);
-	trailRenderer.trailColor = new Color(1.0, 0.0, 0.0, 1.0);
+	trailRenderer.width = 2;
+	trailRenderer.time = 2.0;
+	trailRenderer.headColor = new Color(1.0, 1.0, 1.0, 1.0);
+	trailRenderer.trailColor = new Color(1.0, 1.0, 1.0, 1.0);
 
 	engine.resourceManager
 		.load<Texture2D>({
-			url: "https://gw.alipayobjects.com/mdn/rms_d27172/afts/img/A*kxloQYq2YDEAAAAAAAAAAAAAARQnAQ",
+			url: "https://layaair.layabox.com/3.x/demo/resources/res/threeDimen/trail/Assets/tex/wenli00154.jpg",
 			type: AssetType.Texture2D
 		})
 		.then((resource) => {
@@ -199,7 +195,7 @@ function loadGUI() {
 		headColor: Oasis.colorToGui(Oasis.trailRenderer.headColor),
 		trailColor: Oasis.colorToGui(Oasis.trailRenderer.trailColor),
 		texture: "None",
-		tile_S: 8,
+		tile_S: 1,
 		tile_T: 1,
 	};
 
@@ -207,8 +203,8 @@ function loadGUI() {
 	const trailFolder = gui.addFolder("Trail");
 	trailFolder.open();
 	trailFolder
-		.add(state, "time", 0.1, 4.0)
-		.step(0.1)
+		.add(state, "time", 1, 4)
+		.step(1)
 		.onChange((v) => {
 			Oasis.trailRenderer.time = v;
 		});
@@ -241,16 +237,16 @@ function loadGUI() {
 			Oasis.trailRenderer.texture = v === "None" ? null : Oasis.textures[v];
 		});
 	textureFolder
-		.add(state, "tile_S", 0, 20)
-		.step(1)
+		.add(state, "tile_S", 0, 10)
+		.step(0.1)
 		.onChange((v) => {
 			Oasis.trailRenderer.textureTileS = v;
 		});
 	textureFolder
 		.add(state, "tile_T", 0, 10)
-		.step(1)
+		.step(0.1)
 		.onChange((v) => {
 			Oasis.trailRenderer.textureTileT = v;
 		});
-}	
+}
 
