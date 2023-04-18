@@ -176,7 +176,7 @@ export async function createOasis() {
 
 	engine.resourceManager
 		.load<Texture2D>({
-			url: "https://layaair.layabox.com/3.x/demo/resources/res/threeDimen/trail/Assets/tex/wenli00154.jpg",
+			url: "https://raw.githubusercontent.com/errnull/awesome-oasis-shader/dev/link/02-trail-renderer-demo/src/res/strech.jpg",
 			type: AssetType.Texture2D
 		})
 		.then((resource) => {
