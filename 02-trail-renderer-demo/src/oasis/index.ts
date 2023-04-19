@@ -164,7 +164,7 @@ export async function createOasis() {
 	color.g = 0.8;
 	color.b = 0.5;
 	color.a = 1.0;
-	meshRenderer.mesh = PrimitiveMesh.createCuboid(engine, 1, 1, 0.1);
+	meshRenderer.mesh = PrimitiveMesh.createSphere(engine, 0.6);
 	meshRenderer.setMaterial(mtl);
 	planeEntity.addComponent(Moving);
 
@@ -196,8 +196,8 @@ function loadGUI() {
 		headColor: Oasis.colorToGui(Oasis.trailRenderer.headColor),
 		trailColor: Oasis.colorToGui(Oasis.trailRenderer.trailColor),
 		texture: "None",
-		tile_S: 1,
-		tile_T: 1,
+		Scale_Y: 1,
+		Scale_X: 1,
 		Dragging: true,
 	};
 
@@ -239,16 +239,16 @@ function loadGUI() {
 			Oasis.trailRenderer.texture = v === "None" ? null : Oasis.textures[v];
 		});
 	textureFolder
-		.add(state, "tile_S", 0, 6)
+		.add(state, "Scale_Y", 0, 6)
 		.step(0.1)
 		.onChange((v) => {
-			Oasis.trailRenderer.textureTileS = v;
+			Oasis.trailRenderer.textureScaleY = v;
 		});
 	textureFolder
-		.add(state, "tile_T", 0, 6)
+		.add(state, "Scale_X", 0, 6)
 		.step(0.1)
 		.onChange((v) => {
-			Oasis.trailRenderer.textureTileT = v;
+			Oasis.trailRenderer.textureScaleX = v;
 		});
 	textureFolder
 		.add(state, "Dragging")

@@ -7,6 +7,7 @@
 		"serve": "vite preview"
 	},
 	"dependencies": {
+		"@galacean/engine-toolkit": "^1.0.0-beta.0",
 		"dat.gui": "0.7.7",
 		"react": "^17.0.0",
 		"react-dom": "^17.0.0"
