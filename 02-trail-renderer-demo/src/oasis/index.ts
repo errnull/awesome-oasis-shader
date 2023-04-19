@@ -169,10 +169,11 @@ export async function createOasis() {
 	planeEntity.addComponent(Moving);
 
 	let trailRenderer = planeEntity.addComponent(TrailRenderer);
-	trailRenderer.width = 2;
-	trailRenderer.time = 2.0;
-	trailRenderer.headColor = new Color(1.0, 1.0, 1.0, 1.0);
-	trailRenderer.trailColor = new Color(1.0, 1.0, 1.0, 1.0);
+	trailRenderer.width = 1;
+	trailRenderer.time = 1;
+	trailRenderer.headColor = new Color(1.0, 0.0, 0.0, 1.0);
+	trailRenderer.trailColor = new Color(0.0, 1.0, 0.0, 1.0);
+	trailRenderer.textureDragging = true;
 
 	engine.resourceManager
 		.load<Texture2D>({
@@ -180,7 +181,7 @@ export async function createOasis() {
 			type: AssetType.Texture2D
 		})
 		.then((resource) => {
-			Oasis.textures["Snow"] = resource;
+			Oasis.textures["Strech"] = resource;
 			engine.run();
 		});
 	Oasis.trailRenderer = trailRenderer;
@@ -197,19 +198,20 @@ function loadGUI() {
 		texture: "None",
 		tile_S: 1,
 		tile_T: 1,
+		Dragging: true,
 	};
 
 	const gui = new dat.GUI();
 	const trailFolder = gui.addFolder("Trail");
 	trailFolder.open();
 	trailFolder
-		.add(state, "time", 1, 4)
+		.add(state, "time", 0, 6)
 		.step(1)
 		.onChange((v) => {
 			Oasis.trailRenderer.time = v;
 		});
 	trailFolder
-		.add(state, "width", 0, 10)
+		.add(state, "width", 0, 6)
 		.step(1)
 		.onChange((v) => {
 			Oasis.trailRenderer.width = v;
@@ -232,21 +234,26 @@ function loadGUI() {
 	const textureFolder = gui.addFolder("Texture");
 	textureFolder.open();
 	textureFolder
-		.add(state, "texture", ["None", "Snow", ...Object.keys(Oasis.textures)])
+		.add(state, "texture", ["None", "Strech", ...Object.keys(Oasis.textures)])
 		.onChange((v) => {
 			Oasis.trailRenderer.texture = v === "None" ? null : Oasis.textures[v];
 		});
 	textureFolder
-		.add(state, "tile_S", 0, 10)
+		.add(state, "tile_S", 0, 6)
 		.step(0.1)
 		.onChange((v) => {
 			Oasis.trailRenderer.textureTileS = v;
 		});
 	textureFolder
-		.add(state, "tile_T", 0, 10)
+		.add(state, "tile_T", 0, 6)
 		.step(0.1)
 		.onChange((v) => {
 			Oasis.trailRenderer.textureTileT = v;
+		});
+	textureFolder
+		.add(state, "Dragging")
+		.onChange((v) => {
+			Oasis.trailRenderer.textureDragging = v;
 		});
 }
 
